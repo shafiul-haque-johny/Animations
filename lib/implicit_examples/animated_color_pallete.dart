@@ -42,12 +42,22 @@ class _AnimatedColorPaletteState extends State<AnimatedColorPalette> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             for (Color color in currentPalette)
-              Container(
+            /*
+            200ms -> 20%
+            400ms -> 40%
+            600ms -> 60%
+            800ms -> 80%
+            1000ms -> 100%
+             */
+              AnimatedContainer(
+                curve: Curves.linear,
+                duration: const Duration(microseconds: 1000),
                 width: 100,
                 height: 100,
                 color: color,
                 margin: const EdgeInsets.all(8),
               ),
+            const SizedBox(height: 10),
             ElevatedButton(
               onPressed: regeneratePalette,
               child: const Text('Generate New Palette'),
